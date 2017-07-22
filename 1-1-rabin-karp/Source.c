@@ -1,4 +1,4 @@
-﻿// LABA 1-1-rabin-karp
+// LABA 1-1-rabin-karp
 // by Dimonchik0036
 
 #define _CRT_SECURE_NO_WARNINGS

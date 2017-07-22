@@ -12,7 +12,7 @@
 #define SHABLON_SIZE 20
 #define MAX_CHAR 256
 
-//Производит сравнение шаблона с текстом, при совпадении
+//РџСЂРѕРёР·РІРѕРґРёС‚ СЃСЂР°РІРЅРµРЅРёРµ С€Р°Р±Р»РѕРЅР° СЃ С‚РµРєСЃС‚РѕРј, РїСЂРё СЃРѕРІРїР°РґРµРЅРёРё
 void search(char *text, char *shablon, int digit, int index);
 
 int main()
@@ -26,11 +26,11 @@ int main()
 
 	int sizeShablon = strlen(shablon);
 
-	//Переменная для сохранения нумерации
+	//РџРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ РЅСѓРјРµСЂР°С†РёРё
 	int shift = 0;
 	int textSize = fread(text, sizeof(char), TEXT_SIZE, stdin);
 
-	//Создание массива стоп-символов
+	//РЎРѕР·РґР°РЅРёРµ РјР°СЃСЃРёРІР° СЃС‚РѕРї-СЃРёРјРІРѕР»РѕРІ
 	//============================================
 	unsigned char skip[MAX_CHAR];
 
@@ -42,14 +42,14 @@ int main()
 	//============================================
 
 	unsigned char lastCharInShablon, charInText;
-	int index; //Текущая позиция в блоке
+	int index; //РўРµРєСѓС‰Р°СЏ РїРѕР·РёС†РёСЏ РІ Р±Р»РѕРєРµ
 
 	lastCharInShablon = shablon[sizeShablon - 1];
 	index = 0;
 
 	while ((textSize == TEXT_SIZE) || (index <= textSize - sizeShablon) )
 	{
-		//Считывание нового блока при необходимости
+		//РЎС‡РёС‚С‹РІР°РЅРёРµ РЅРѕРІРѕРіРѕ Р±Р»РѕРєР° РїСЂРё РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё
 		if (index + sizeShablon > textSize)
 		{
 			int bufBegin = index;

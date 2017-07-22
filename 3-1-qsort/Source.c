@@ -6,19 +6,19 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//Сортирует массив
+//РЎРѕСЂС‚РёСЂСѓРµС‚ РјР°СЃСЃРёРІ
 void quickSort(int* a, int first, int last);
 
-//Меняет элементы массива местами
+//РњРµРЅСЏРµС‚ СЌР»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР° РјРµСЃС‚Р°РјРё
 void swap(int *arr, int i, int j);
 
 int main()
 {
-	int n; //Количество чисел в массиве
+	int n; //РљРѕР»РёС‡РµСЃС‚РІРѕ С‡РёСЃРµР» РІ РјР°СЃСЃРёРІРµ
 
 	scanf("%d", &n);
 
-	//Массив из n чисел
+	//РњР°СЃСЃРёРІ РёР· n С‡РёСЃРµР»
 	int *numberArray;
 	numberArray = malloc(n * sizeof(*numberArray));
 
@@ -29,17 +29,17 @@ int main()
 		return 0;
 	}
 
-	int i; //Переменная для цикла
+	int i; //РџРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ С†РёРєР»Р°
 
 	for (i = 0; i < n; i++)
 	{
-		scanf("%d", &numberArray[i]); //Ввод данных в массив
+		scanf("%d", &numberArray[i]); //Р’РІРѕРґ РґР°РЅРЅС‹С… РІ РјР°СЃСЃРёРІ
 	}
 
-	//Сортировка
+	//РЎРѕСЂС‚РёСЂРѕРІРєР°
 	quickSort(numberArray, 0, n - 1);
 
-	//Вывод массива
+	//Р’С‹РІРѕРґ РјР°СЃСЃРёРІР°
 	for (i = 0; i < n; i++)
 	{
 		printf("%d ", numberArray[i]);
@@ -61,7 +61,7 @@ void quickSort(int* arr, int first, int last)
 {
 	int i = first;
 	int j = last;
-	int centr = arr[(first + last) / 2]; //Выбор значения для границы сортировки
+	int centr = arr[(first + last) / 2]; //Р’С‹Р±РѕСЂ Р·РЅР°С‡РµРЅРёСЏ РґР»СЏ РіСЂР°РЅРёС†С‹ СЃРѕСЂС‚РёСЂРѕРІРєРё
 
 	do
 	{
@@ -81,11 +81,11 @@ void quickSort(int* arr, int first, int last)
 		}
 	} while (i <= j);
 
-	//Вызов сортировки правой части
+	//Р’С‹Р·РѕРІ СЃРѕСЂС‚РёСЂРѕРІРєРё РїСЂР°РІРѕР№ С‡Р°СЃС‚Рё
 	if (i < last)
 		quickSort(arr, i, last);
 
-	//Вызов сортировки левой части
+	//Р’С‹Р·РѕРІ СЃРѕСЂС‚РёСЂРѕРІРєРё Р»РµРІРѕР№ С‡Р°СЃС‚Рё
 	if (first < j)
 		quickSort(arr, first, j);
 }

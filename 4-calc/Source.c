@@ -7,16 +7,16 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-// Обозначает границу стека 
+// РћР±РѕР·РЅР°С‡Р°РµС‚ РіСЂР°РЅРёС†Сѓ СЃС‚РµРєР° 
 #define END 0
 
-// Операции, доступные на стеке 
+// РћРїРµСЂР°С†РёРё, РґРѕСЃС‚СѓРїРЅС‹Рµ РЅР° СЃС‚РµРєРµ 
 #define ADD '+'
 #define SUB '-'
 #define MUL '*'
 #define DIV '/'
 
-// Операция или число(для поля isOperation) 
+// РћРїРµСЂР°С†РёСЏ РёР»Рё С‡РёСЃР»Рѕ(РґР»СЏ РїРѕР»СЏ isOperation) 
 #define OPERATION true
 #define NUMBER false
 
@@ -27,11 +27,11 @@
 #define MAX_STACK_SIZE 1024
 #define MAX_OPERATION_STACK_SIZE 1024
 
-// Сообщения об ошибке
+// РЎРѕРѕР±С‰РµРЅРёСЏ РѕР± РѕС€РёР±РєРµ
 #define AHTUNG {printf("syntax error\n"); return NULL;}
 #define ALARM {printf("division by zero\n"); return;}
 
-// Последние считанные лексемы 
+// РџРѕСЃР»РµРґРЅРёРµ СЃС‡РёС‚Р°РЅРЅС‹Рµ Р»РµРєСЃРµРјС‹ 
 enum last_item 
 {
 	LAST_START_FILE,
@@ -41,50 +41,50 @@ enum last_item
 	LAST_CLOSE_BRACKET
 };
 
-// Элемент стека
+// Р­Р»РµРјРµРЅС‚ СЃС‚РµРєР°
 struct Item 
 {
-	// Значение данного элемента стека
+	// Р—РЅР°С‡РµРЅРёРµ РґР°РЅРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° СЃС‚РµРєР°
 	int value;
 
-	// Если true, то в поле value хранится значение соответсвующее операции, иначе там число
+	// Р•СЃР»Рё true, С‚Рѕ РІ РїРѕР»Рµ value С…СЂР°РЅРёС‚СЃСЏ Р·РЅР°С‡РµРЅРёРµ СЃРѕРѕС‚РІРµС‚СЃРІСѓСЋС‰РµРµ РѕРїРµСЂР°С†РёРё, РёРЅР°С‡Рµ С‚Р°Рј С‡РёСЃР»Рѕ
 	bool isOperation;
 };
 
-// Проверка на оператор
+// РџСЂРѕРІРµСЂРєР° РЅР° РѕРїРµСЂР°С‚РѕСЂ
 bool isOperator(char c);
 
-// Проверка на число
+// РџСЂРѕРІРµСЂРєР° РЅР° С‡РёСЃР»Рѕ
 bool isNumber(char c);
 
-// Возвращает приоритет
+// Р’РѕР·РІСЂР°С‰Р°РµС‚ РїСЂРёРѕСЂРёС‚РµС‚
 int getOperationPriority(char operation);
 
-// Считывает со входного потока, формирует стек и возвращает его. Если при формировании происходит ошибка, кричит AHTUNG и завершает работу.
+// РЎС‡РёС‚С‹РІР°РµС‚ СЃРѕ РІС…РѕРґРЅРѕРіРѕ РїРѕС‚РѕРєР°, С„РѕСЂРјРёСЂСѓРµС‚ СЃС‚РµРє Рё РІРѕР·РІСЂР°С‰Р°РµС‚ РµРіРѕ. Р•СЃР»Рё РїСЂРё С„РѕСЂРјРёСЂРѕРІР°РЅРёРё РїСЂРѕРёСЃС…РѕРґРёС‚ РѕС€РёР±РєР°, РєСЂРёС‡РёС‚ AHTUNG Рё Р·Р°РІРµСЂС€Р°РµС‚ СЂР°Р±РѕС‚Сѓ.
 struct Item* infixToPostfix() 
 {
 	struct Item *stack = malloc(MAX_STACK_SIZE * sizeof(struct Item));
 
-	// Стек операций
+	// РЎС‚РµРє РѕРїРµСЂР°С†РёР№
 	char operatorsStack[MAX_OPERATION_STACK_SIZE];
 
-	// Считываем входную строку.
+	// РЎС‡РёС‚С‹РІР°РµРј РІС…РѕРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ.
 	char input[INPUT_SIZE];
 	gets(input);
 
 	size_t stackPos = 0;
 	size_t operatorsStackLen = 0;
 
-	// Тип последнего обработаного элемента (определены как #define LAST_*)
+	// РўРёРї РїРѕСЃР»РµРґРЅРµРіРѕ РѕР±СЂР°Р±РѕС‚Р°РЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° (РѕРїСЂРµРґРµР»РµРЅС‹ РєР°Рє #define LAST_*)
 	enum last_item lastItemType = LAST_START_FILE;
 
 	size_t pos = 0;
 
 	while (input[pos] != '\0') 
 	{
-		if (isNumber(input[pos])) // Считывание числа
+		if (isNumber(input[pos])) // РЎС‡РёС‚С‹РІР°РЅРёРµ С‡РёСЃР»Р°
 		{ 
-			if (lastItemType == LAST_NUMBER || lastItemType == LAST_CLOSE_BRACKET) // Нет оператором м-ду числами: x y .. или .. ) x ..
+			if (lastItemType == LAST_NUMBER || lastItemType == LAST_CLOSE_BRACKET) // РќРµС‚ РѕРїРµСЂР°С‚РѕСЂРѕРј Рј-РґСѓ С‡РёСЃР»Р°РјРё: x y .. РёР»Рё .. ) x ..
 				AHTUNG
 
 			int number = 0;
@@ -101,31 +101,31 @@ struct Item* infixToPostfix()
 
 			lastItemType = LAST_NUMBER;
 		}
-		else if (input[pos] == OPEN_BRACKET) // Начало выражения в скобках
+		else if (input[pos] == OPEN_BRACKET) // РќР°С‡Р°Р»Рѕ РІС‹СЂР°Р¶РµРЅРёСЏ РІ СЃРєРѕР±РєР°С…
 		{ 
-			if (lastItemType == LAST_NUMBER) // Нет оператора после числа: .. x ( ..
+			if (lastItemType == LAST_NUMBER) // РќРµС‚ РѕРїРµСЂР°С‚РѕСЂР° РїРѕСЃР»Рµ С‡РёСЃР»Р°: .. x ( ..
 				AHTUNG
 			
 			operatorsStack[operatorsStackLen++] = input[pos];
 			lastItemType = LAST_OPEN_BRACKET;
 		}
-		else if (isOperator(input[pos])) // Оператор +, -, *, /
+		else if (isOperator(input[pos])) // РћРїРµСЂР°С‚РѕСЂ +, -, *, /
 		{ 
 			if (lastItemType == LAST_START_FILE || lastItemType == LAST_OPEN_BRACKET) 
 			{
-				if (input[pos] == ADD || input[pos] == SUB) // Корректная обработка отрицательных чисел: - x .. и .. (- x ..
+				if (input[pos] == ADD || input[pos] == SUB) // РљРѕСЂСЂРµРєС‚РЅР°СЏ РѕР±СЂР°Р±РѕС‚РєР° РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹С… С‡РёСЃРµР»: - x .. Рё .. (- x ..
 				{ 
 					struct Item item = { 0, NUMBER };
 					stack[stackPos++] = item;
 				}
-				else // Нет левого аргумента: * x .. и .. ( * x ..
+				else // РќРµС‚ Р»РµРІРѕРіРѕ Р°СЂРіСѓРјРµРЅС‚Р°: * x .. Рё .. ( * x ..
 					AHTUNG
 			}
 
-			if (lastItemType == LAST_OPERATION) // Два оператора подряд: .. + * ..
+			if (lastItemType == LAST_OPERATION) // Р”РІР° РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґСЂСЏРґ: .. + * ..
 				AHTUNG
 
-			// Проверяем приоритеты операций
+			// РџСЂРѕРІРµСЂСЏРµРј РїСЂРёРѕСЂРёС‚РµС‚С‹ РѕРїРµСЂР°С†РёР№
 			if (getOperationPriority(input[pos]) <= getOperationPriority(operatorsStack[operatorsStackLen - 1])) 
 			{
 				struct Item item = { operatorsStack[operatorsStackLen - 1], OPERATION };
@@ -136,11 +136,11 @@ struct Item* infixToPostfix()
 			operatorsStack[operatorsStackLen++] = input[pos];
 			lastItemType = LAST_OPERATION;
 		}
-		else if (input[pos] == CLOSE_BRACKET) // Конец выражения в скобках
+		else if (input[pos] == CLOSE_BRACKET) // РљРѕРЅРµС† РІС‹СЂР°Р¶РµРЅРёСЏ РІ СЃРєРѕР±РєР°С…
 		{ 
-			if (lastItemType == LAST_OPEN_BRACKET) // Пустая скобка: .. ( ) .. 
+			if (lastItemType == LAST_OPEN_BRACKET) // РџСѓСЃС‚Р°СЏ СЃРєРѕР±РєР°: .. ( ) .. 
 				AHTUNG
-			if (lastItemType == LAST_OPERATION) // Нет правого аргумента: .. ( x + ) ..
+			if (lastItemType == LAST_OPERATION) // РќРµС‚ РїСЂР°РІРѕРіРѕ Р°СЂРіСѓРјРµРЅС‚Р°: .. ( x + ) ..
 				AHTUNG
 
 			bool found = false;
@@ -157,26 +157,26 @@ struct Item* infixToPostfix()
 				stack[stackPos++] = item;
 				operatorsStackLen--;
 			}
-			if (!found) // До конца стека операций не было найдено открывающихся скобок, значит это ошибка
+			if (!found) // Р”Рѕ РєРѕРЅС†Р° СЃС‚РµРєР° РѕРїРµСЂР°С†РёР№ РЅРµ Р±С‹Р»Рѕ РЅР°Р№РґРµРЅРѕ РѕС‚РєСЂС‹РІР°СЋС‰РёС…СЃСЏ СЃРєРѕР±РѕРє, Р·РЅР°С‡РёС‚ СЌС‚Рѕ РѕС€РёР±РєР°
 				AHTUNG
 
 			operatorsStackLen--;
 			lastItemType = LAST_CLOSE_BRACKET;
 		}
-		else if (input[pos] == ' ') // Пропускаем пробелы
+		else if (input[pos] == ' ') // РџСЂРѕРїСѓСЃРєР°РµРј РїСЂРѕР±РµР»С‹
 		{ 
 
 		}
-		else // Неизвестный символ
+		else // РќРµРёР·РІРµСЃС‚РЅС‹Р№ СЃРёРјРІРѕР»
 			AHTUNG
 		
 		pos++;
 	}
 
-	if (lastItemType == LAST_OPERATION) // Нет правого аргумента: "... 1 * "
+	if (lastItemType == LAST_OPERATION) // РќРµС‚ РїСЂР°РІРѕРіРѕ Р°СЂРіСѓРјРµРЅС‚Р°: "... 1 * "
 		AHTUNG
 
-	// В конце считывания закидываем все операции, оставшиеся на стеке операций, в основной стек
+	// Р’ РєРѕРЅС†Рµ СЃС‡РёС‚С‹РІР°РЅРёСЏ Р·Р°РєРёРґС‹РІР°РµРј РІСЃРµ РѕРїРµСЂР°С†РёРё, РѕСЃС‚Р°РІС€РёРµСЃСЏ РЅР° СЃС‚РµРєРµ РѕРїРµСЂР°С†РёР№, РІ РѕСЃРЅРѕРІРЅРѕР№ СЃС‚РµРє
 	while (operatorsStackLen > 0) 
 	{
 		if (operatorsStack[operatorsStackLen - 1] == OPEN_BRACKET)
@@ -187,17 +187,17 @@ struct Item* infixToPostfix()
 		operatorsStackLen--;
 	}
 
-	// Помечаем конец стека
+	// РџРѕРјРµС‡Р°РµРј РєРѕРЅРµС† СЃС‚РµРєР°
 	struct Item item = { END, OPERATION };
 	stack[stackPos] = item;
 
 	return stack;
 }
 
-// Определяет размер стека
+// РћРїСЂРµРґРµР»СЏРµС‚ СЂР°Р·РјРµСЂ СЃС‚РµРєР°
 size_t stackSize(struct Item *stack);
 
-// Вычисляет результат выражения
+// Р’С‹С‡РёСЃР»СЏРµС‚ СЂРµР·СѓР»СЊС‚Р°С‚ РІС‹СЂР°Р¶РµРЅРёСЏ
 void postfixCalc(struct Item *stack);
 
 int main() 
