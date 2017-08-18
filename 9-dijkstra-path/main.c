@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 
 	int M = input_handling(fin, 0, N * (N + 1) / 2, "bad number of edges\n");
 
-	/* Таблица сммежности */
+	/* РўР°Р±Р»РёС†Р° СЃРјРјРµР¶РЅРѕСЃС‚Рё */
 	unsigned int **matrix = (unsigned int**)malloc(N * sizeof(unsigned int*));
 	for (int i = 0; i < N; i++)
 	{
@@ -59,12 +59,12 @@ int main(int argc, char *argv[])
 		for (int j = 0; j < N; ++j) matrix[i][j] = INF;
 	}
 
-	bool used[MAX_NODES]; // Пройденые вершины
-	int parent[MAX_NODES]; // Предки вершин
-	unsigned distance[MAX_NODES]; // Расстояние от начальной вершины
-	unsigned overflow[MAX_NODES]; // Количество INT_MAX
+	bool used[MAX_NODES]; // РџСЂРѕР№РґРµРЅС‹Рµ РІРµСЂС€РёРЅС‹
+	int parent[MAX_NODES]; // РџСЂРµРґРєРё РІРµСЂС€РёРЅ
+	unsigned distance[MAX_NODES]; // Р Р°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РЅР°С‡Р°Р»СЊРЅРѕР№ РІРµСЂС€РёРЅС‹
+	unsigned overflow[MAX_NODES]; // РљРѕР»РёС‡РµСЃС‚РІРѕ INT_MAX
 
-	/* Инициализация начальными значениями*/
+	/* РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РЅР°С‡Р°Р»СЊРЅС‹РјРё Р·РЅР°С‡РµРЅРёСЏРјРё*/
 	for (int i = 0; i < N; i++)
 	{
 		used[i] = false;
@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 		parent[i] = -1;
 	}
 
-	/* Заполнение матрицы смежности */
+	/* Р—Р°РїРѕР»РЅРµРЅРёРµ РјР°С‚СЂРёС†С‹ СЃРјРµР¶РЅРѕСЃС‚Рё */
 	for (int i = 0; i < M; ++i)
 	{
 		int v1 = input_handling(fin, 1, N, "bad vertex\n") - 1;
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 
 	for (int i = 0; i < N; ++i)
 	{
-		/* Поиск вершины, которая наименее удалена от начальной вершины */
+		/* РџРѕРёСЃРє РІРµСЂС€РёРЅС‹, РєРѕС‚РѕСЂР°СЏ РЅР°РёРјРµРЅРµРµ СѓРґР°Р»РµРЅР° РѕС‚ РЅР°С‡Р°Р»СЊРЅРѕР№ РІРµСЂС€РёРЅС‹ */
 		int v = -1;
 
 		for (int j = 0; j < N; ++j) if (!used[j] && (v == -1 || distance[j] < distance[v])) v = j;
@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
 
 		used[v] = true;
 
-		/* Релаксирование соседей */
+		/* Р РµР»Р°РєСЃРёСЂРѕРІР°РЅРёРµ СЃРѕСЃРµРґРµР№ */
 		for (int j = 0; j < N; ++j)
 		{
 			if (matrix[v][j] == INF) continue;
@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	/* Первая строка вывода */
+	/* РџРµСЂРІР°СЏ СЃС‚СЂРѕРєР° РІС‹РІРѕРґР° */
 	for (int i = 0; i < N; ++i)
 	{
 		if (distance[i] == INF) fprintf(fout, "oo ");
@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	/* Вторая строка вывода */
+	/* Р’С‚РѕСЂР°СЏ СЃС‚СЂРѕРєР° РІС‹РІРѕРґР° */
 	if (S == F) fprintf(fout, "%d\n", S + 1);
 	else if (parent[F] == -1) fprintf(fout, "no path\n");
 	else if (overflow[F] && overflow_count >= 2) fprintf(fout, "overflow\n");
