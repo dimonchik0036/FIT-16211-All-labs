@@ -10,7 +10,7 @@ int top_sort(struct List *list, int N, FILE *fout)
 	int resInd = 0;
 	int *res = (int *)malloc(N * sizeof(int));
 
-	/* Красим вершины */
+	/* РљСЂР°СЃРёРј РІРµСЂС€РёРЅС‹ */
 	for (int i = 0; i < N; ++i)
 	{
 		if ((2 != list[i].color) && (1 == list[i].color || DFS(&list[i], res, &resInd)))
@@ -20,7 +20,7 @@ int top_sort(struct List *list, int N, FILE *fout)
 		}
 	}
 
-	/* Выводим результат */
+	/* Р’С‹РІРѕРґРёРј СЂРµР·СѓР»СЊС‚Р°С‚ */
 	for (int i = 0; i < N; ++i) fprintf(fout, "%d ", res[N - i - 1]);
 
 	free(res);
@@ -28,7 +28,7 @@ int top_sort(struct List *list, int N, FILE *fout)
 	return 0;
 }
 
-/* Если попали в серую вершину (1), значит обнаружен цикл */
+/* Р•СЃР»Рё РїРѕРїР°Р»Рё РІ СЃРµСЂСѓСЋ РІРµСЂС€РёРЅСѓ (1), Р·РЅР°С‡РёС‚ РѕР±РЅР°СЂСѓР¶РµРЅ С†РёРєР» */
 static int DFS(struct List *list, int *res, int *resInd)
 {
 	if (1 == list->color) return 1;
@@ -43,7 +43,7 @@ static int DFS(struct List *list, int *res, int *resInd)
 	}
 
 	list->color = 2;
-	res[*resInd] = list->index; // Добавляем вершину в буффер вывода
+	res[*resInd] = list->index; // Р”РѕР±Р°РІР»СЏРµРј РІРµСЂС€РёРЅСѓ РІ Р±СѓС„С„РµСЂ РІС‹РІРѕРґР°
 	(*resInd)++;
 
 	return 0;
